@@ -1,5 +1,5 @@
 ﻿using System;
-using Chukou1Demo.CK1V2_1;
+using Chukou1Demo.CK1;
 
 namespace Chukou1Demo.Aspnet
 {

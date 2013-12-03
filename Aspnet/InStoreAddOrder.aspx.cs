@@ -30,18 +30,18 @@ namespace Chukou1Demo.Aspnet
             var productList = new List<CK1.InStoreProduct>();
             productList.Add(new CK1.InStoreProduct()
             {
-                DeclaredName = "水龍頭",
+                DeclaredName = "Phone",
                 DeclaredValue = 100,
                 Quantity = 100,
-                SKU = "水龙头",
+                SKU = "iphone 4S",
             });
 
 
             var caseList = new List<CK1.InStoreCase>();
             caseList.Add(new CK1.InStoreCase()
             {
-                CaseNo = 0,
-                CaseSign = "Test123",
+                CaseNo = 1,
+                //CaseSign = "NetTest123",
                 Packing = new CK1.Packing()
                 {
                     Height = 10,
@@ -56,9 +56,9 @@ namespace Chukou1Demo.Aspnet
             var orderDetail = new CK1.InStoreOrder()
             {
                 ArriveTime = DateTime.Today,
-                PickupType = ddlPickupType.SelectedIndex,
-                OrderSign = txtOrderSign.Text,
-                Remark = txtRemark.Text,
+                PickupType = 1,
+                //OrderSign = txtOrderSign.Text,
+                Remark = "NetTest123",
                 CaseList = caseList.ToArray(),
                 PickUpAddress = new CK1.PickUpAddress()
                 {
@@ -73,7 +73,7 @@ namespace Chukou1Demo.Aspnet
                 State=CK1.OrderInState.Initial,  
             };
 
-            switch (ddlLocation.SelectedIndex)
+            switch (0)
             {
                 case 0:
                     orderDetail.Location = CK1.EnumLocation.GZ;
@@ -85,7 +85,7 @@ namespace Chukou1Demo.Aspnet
                     orderDetail.Location = CK1.EnumLocation.SH;
                     break;
             }
-            switch (ddlShippingMethod.SelectedIndex)
+            switch (0)
             {
                 case 0:
                     orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.AIR;
@@ -103,7 +103,7 @@ namespace Chukou1Demo.Aspnet
                     orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.UPS;
                     break;
             }
-            switch (ddlWarehouse.SelectedIndex)
+            switch (2)
             {
                 case 0:
                     orderDetail.Warehouse = CK1.EnumWarehouse.US;
@@ -123,10 +123,10 @@ namespace Chukou1Demo.Aspnet
 
             var request = new CK1.InStoreAddOrderRequest()
             {
-                MessageID = txtMessageID.Text,
+                MessageID = "Test Add Instore order by .Net",
                 UserKey = ukt.getUserKey(),
                 Token = ukt.getToken(),
-                Submit = ccbSubmit.Checked,
+                Submit = false,
                 Version = txtVersion.Text,
                 OrderDetail = orderDetail,
             };
