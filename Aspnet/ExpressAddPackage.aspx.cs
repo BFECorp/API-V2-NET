@@ -60,6 +60,7 @@ namespace Chukou1Demo.Aspnet
                     PostCode = "77511",
                     City = "Alvin",
                     Province = "United States",
+                    Phone = "adfasdk"
                 },
                 Status = CK1.OrderExpressState.Initial,
                 TrackCode = txtTrackCode.Text,
@@ -91,7 +92,7 @@ namespace Chukou1Demo.Aspnet
             switch (ddlExpressType.SelectedIndex)
             {
                 case 0:
-                    request.ExpressType = CK1.ExpressType.CDD;
+                    request.ExpressType = CK1.ExpressType.HKP;
                     break;
                 case 1:
                     request.ExpressType = CK1.ExpressType.CEE;
@@ -134,6 +135,8 @@ namespace Chukou1Demo.Aspnet
                     break;
             }
 
+            request.IsTracking = true;
+            request.ExpressType = CK1.ExpressType.HKP;
             var response = clint.ExpressAddPackage(request);
 
             lblAck.Text = response.Ack.ToString();

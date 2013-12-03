@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Chukou1Demo.CK1V2_1;
+using Chukou1Demo.CK1;
 
 namespace Chukou1Demo.Aspnet
 {

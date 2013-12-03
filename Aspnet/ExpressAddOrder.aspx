@@ -27,124 +27,20 @@
 </head>
 <body>
     <form id="Form1" runat="server">
-		<table align="center" style="font-size: large">
-			<tr>
-				<td colspan="3" class="style1" align="center" width="408">
-					<div class="header"><b>ExpressAddOrder Sample</b></div>
-				</td>
-			</tr>
-		</table>
+        <div style="text-align:center;">
+            <b>ExpressAddOrder Sample</b>
+		</div>
 		<br />
 
-        <asp:Panel ID="pnlRequest" runat="server">
-		    <table align="center">
-			    <tr align="right">
-				    <td>Request</td>
-			    </tr>
-		    </table>
-		    <table align="center" style="font-size: small">
-			    
-			    <tr>
-                    <td width="200">Submit</td>
-                    <td>
-                        <asp:CheckBox ID="ccbSubmit" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">MessageID</td>
-                    <td>
-                        <asp:TextBox ID="txtMessageID" runat="server" Width="400px"></asp:TextBox>
-                    </td>
-                </tr>
-			    <tr>
-				    <td width="200">Version</td>
-				    <td>
-					    <asp:TextBox ID="txtVersion" runat="server" Width="400px"></asp:TextBox></td>
-			    </tr>
-			    <tr>
-                    <td width="200" class="style4">OrderDetail</td>
-                    <td>
-                        
-                    </td>
-                </tr>
-			    <tr>
-                    <td width="200">ExpressType</td>
-                    <td>
-                        <asp:DropDownList ID="ddlExpressType" runat="server">
-                            <asp:ListItem Value="HKP">香港小包</asp:ListItem>
-                            <asp:ListItem Value="CEE">中英专线</asp:ListItem>
-                            <asp:ListItem Value="EMS">EMS专线</asp:ListItem>
-                            <asp:ListItem Value="CNP">中国邮政小包</asp:ListItem>
-                            <asp:ListItem Value="HKD">香港DHL</asp:ListItem>
-                            <asp:ListItem Value="UPS">UPS专线</asp:ListItem>
-                            <asp:ListItem Value="CDD">中德专线</asp:ListItem>
-                            <asp:ListItem Value="EUB">国际E邮宝</asp:ListItem>
-                            <asp:ListItem Value="CUE">中美专线</asp:ListItem>
-                            <asp:ListItem Value="SHD">上海DHL</asp:ListItem>
-                            <asp:ListItem Value="CES">上海中英专线</asp:ListItem>
-                            <asp:ListItem Value="SGP">新加坡小包</asp:ListItem>
-                            <asp:ListItem Value="EMD">EMD专线</asp:ListItem>
-                            <asp:ListItem Value="CTU">CTU专线</asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">IsTracking</td>
-                    <td>
-                        <asp:CheckBox ID="ccbIsTracking" runat="server" />
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">Location</td>
-                    <td>
-                         <asp:TextBox ID="txtLocation" runat="server" Width="400px"></asp:TextBox>        
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">OrderSign</td>
-                    <td>
-                         <asp:TextBox ID="txtOrderSign" runat="server" Width="400px"></asp:TextBox>        
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">PackageList</td>
-                    <td>
-                         <asp:TextBox ID="txtPackageList" runat="server" Width="400px" Enabled="False"></asp:TextBox>        
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">PickUpAddress</td>
-                    <td>   
-                        <asp:TextBox ID="txtPickUpAddress" runat="server" Width="400px" Enabled="False"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">PickUpType</td>
-                    <td>
-                        <asp:DropDownList ID="ddlPickUpType" runat="server">
-                            <asp:ListItem Value="上门揽取">上门揽取</asp:ListItem>
-                            <asp:ListItem Value="自送货">自送货</asp:ListItem>
-                        </asp:DropDownList>    
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">Remark</td>
-                    <td>
-                         <asp:TextBox ID="txtRemark" runat="server" Width="400px"></asp:TextBox>        
-                    </td>
-                </tr>
-			    <tr>
-				    <td width="200" align="right">
-                        <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="提交" 
-                            Width="40px" />
-                    </td>
-			    </tr>
-                <tr>
-                   <td style="text-align: right">
-                        <a href="Cell.aspx" style="text-align: right">返回接口目录</a>
-                   </td>
-                </tr>
-		    </table>            
+        <asp:Panel ID="pnlRequest" style="text-align:center;" runat="server">
+		    <div>
+                <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="下单" 
+                    Width="40px" />
+		    </div>            
+            <br />
+		    <div>
+                <a href="Cell.aspx" style="text-align: right">返回接口目录</a>
+		    </div>            
         </asp:Panel>
         <asp:Panel ID="pnlResponse" runat="server">
 		    <table align="center">

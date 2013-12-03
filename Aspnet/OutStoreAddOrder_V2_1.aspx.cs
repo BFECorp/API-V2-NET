@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Chukou1Demo.CK1V2_1;
+using Chukou1Demo.CK1;
 //using Chukou1Demo.CK1;
 
 namespace Chukou1Demo.Aspnet
@@ -150,14 +150,14 @@ namespace Chukou1Demo.Aspnet
             Initialize();
         }
 
-        public static Chukou1Demo.CK1V2_1.OutStoreShippingV2_1 ConvertOutStoreShippingV2_1(string name)
+        public static Chukou1Demo.CK1.OutStoreShippingV2_1 ConvertOutStoreShippingV2_1(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("can't be null or empty.", "name");
             }
-            Chukou1Demo.CK1V2_1.OutStoreShippingV2_1 eenum;
-            var result = Enum.TryParse<Chukou1Demo.CK1V2_1.OutStoreShippingV2_1>(name, true, out eenum);
+            Chukou1Demo.CK1.OutStoreShippingV2_1 eenum;
+            var result = Enum.TryParse<Chukou1Demo.CK1.OutStoreShippingV2_1>(name, true, out eenum);
             if (!result)
                 throw new ArgumentException(" Invalid", "name");
 
