@@ -34,3 +34,6 @@ CK1.API.Internal.Yewu/*.nupkg
 *.pubxml
 **/App_Data/Elmah.Errors/error-*.xml
 **/Properties/PublishProfiles/*.pubxml
+_UpgradeReport_Files/
+Service References/
+UpgradeLog.*
