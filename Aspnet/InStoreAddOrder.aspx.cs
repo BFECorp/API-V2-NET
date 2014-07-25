@@ -88,19 +88,19 @@ namespace Chukou1Demo.Aspnet
             switch (0)
             {
                 case 0:
-                    orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.AIR;
+                    orderDetail.ShippingMethod = CK1.ShippingType.AIR;
                     break;
                 case 1:
-                    orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.SEA;
+                    orderDetail.ShippingMethod = CK1.ShippingType.SEA;
                     break;
                 case 2:
-                    orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.EMS;
+                    orderDetail.ShippingMethod = CK1.ShippingType.EMS;
                     break;
                 case 3:
-                    orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.DHL;
+                    orderDetail.ShippingMethod = CK1.ShippingType.DHL;
                     break;
                 default:
-                    orderDetail.ShippingMethod = CK1.LogisticsShippingMethod.UPS;
+                    orderDetail.ShippingMethod = CK1.ShippingType.UPS;
                     break;
             }
             switch (2)

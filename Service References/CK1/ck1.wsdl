@@ -91,6 +91,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="PickupType" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="PickUpAddress" type="tns:PickUpAddress" />
           <s:element minOccurs="0" maxOccurs="1" name="PackageList" type="tns:ArrayOfExpressPackage" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsGzShare" nillable="true" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="ExpressType">
@@ -160,6 +161,17 @@
           <s:enumeration value="CRE" />
           <s:enumeration value="DGM" />
           <s:enumeration value="CRP" />
+          <s:enumeration value="MYR" />
+          <s:enumeration value="MYN" />
+          <s:enumeration value="NLR" />
+          <s:enumeration value="NLN" />
+          <s:enumeration value="CAF" />
+          <s:enumeration value="CRA" />
+          <s:enumeration value="CRB" />
+          <s:enumeration value="EUF" />
+          <s:enumeration value="CLS" />
+          <s:enumeration value="CLY" />
+          <s:enumeration value="BEO" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="PickUpAddress">
@@ -249,7 +261,11 @@
       </s:complexType>
       <s:complexType name="ExpressProduct">
         <s:complexContent mixed="false">
-          <s:extension base="tns:Product" />
+          <s:extension base="tns:Product">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ProductId" type="s:string" />
+            </s:sequence>
+          </s:extension>
         </s:complexContent>
       </s:complexType>
       <s:complexType name="Product">
@@ -574,7 +590,7 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="OrderSign" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="State" type="tns:OrderInState" />
-          <s:element minOccurs="1" maxOccurs="1" name="ShippingMethod" type="tns:LogisticsShippingMethod" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShippingMethod" type="tns:ShippingType" />
           <s:element minOccurs="1" maxOccurs="1" name="Warehouse" type="tns:EnumWarehouse" />
           <s:element minOccurs="1" maxOccurs="1" name="Location" type="tns:EnumLocation" />
           <s:element minOccurs="1" maxOccurs="1" name="PickupType" type="s:int" />
@@ -598,7 +614,7 @@
           <s:enumeration value="GoodsLost" />
         </s:restriction>
       </s:simpleType>
-      <s:simpleType name="LogisticsShippingMethod">
+      <s:simpleType name="ShippingType">
         <s:restriction base="s:string">
           <s:enumeration value="AIR" />
           <s:enumeration value="SEA" />
@@ -608,6 +624,7 @@
           <s:enumeration value="CND" />
           <s:enumeration value="FED" />
           <s:enumeration value="BFE" />
+          <s:enumeration value="ROAD" />
         </s:restriction>
       </s:simpleType>
       <s:simpleType name="EnumWarehouse">
@@ -620,6 +637,12 @@
           <s:enumeration value="GZ" />
           <s:enumeration value="None" />
           <s:enumeration value="NJ" />
+          <s:enumeration value="BY" />
+          <s:enumeration value="LA" />
+          <s:enumeration value="ES" />
+          <s:enumeration value="TO" />
+          <s:enumeration value="MO" />
+          <s:enumeration value="RI" />
         </s:restriction>
       </s:simpleType>
       <s:simpleType name="EnumLocation">
@@ -734,13 +757,22 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:element name="M2CAddOrder">
+      <s:element name="M2CAddOrderNew">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:M2CAddOrderRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:M2CAddOrderNewRequest" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="M2CAddOrderNewRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:M2CAddOrderRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="OrderDetailNew" type="tns:OutStoreOrderNew" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:complexType name="M2CAddOrderRequest">
         <s:complexContent mixed="false">
           <s:extension base="tns:BaseRequest">
@@ -777,6 +809,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="ShipToAddress" type="tns:ShipToAddress" />
           <s:element minOccurs="0" maxOccurs="1" name="ProductList" type="tns:ArrayOfOutStoreProduct" />
           <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingNew" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="OutStoreShippingV2_1">
@@ -837,6 +870,7 @@
           <s:enumeration value="AUNIP" />
           <s:enumeration value="AURIP" />
           <s:enumeration value="UKRLF" />
+          <s:enumeration value="AURSP" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="ArrayOfOutStoreProduct">
@@ -853,10 +887,94 @@
           <s:element minOccurs="0" maxOccurs="1" name="DeclareValue" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="M2CAddOrderResponse">
+      <s:complexType name="OutStoreOrderNew">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:OutStoreOrder">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="WarehouseNew" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PackageListNew" type="tns:ArrayOfOutStorePackageNew" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="OutStoreOrder">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrderSign" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="tns:OrderOutState" />
+          <s:element minOccurs="1" maxOccurs="1" name="Warehouse" type="tns:EnumWarehouse" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PackageList" type="tns:ArrayOfOutStorePackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OrderOutState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Initial" />
+          <s:enumeration value="Sutmitted" />
+          <s:enumeration value="Examined" />
+          <s:enumeration value="Pending" />
+          <s:enumeration value="Shipped" />
+          <s:enumeration value="Dispatching" />
+          <s:enumeration value="Delivered" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfOutStorePackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OutStorePackage" nillable="true" type="tns:OutStorePackage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OutStorePackage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="tns:OrderOutState" />
+          <s:element minOccurs="0" maxOccurs="1" name="Custom" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Shipping" nillable="true" type="tns:OutStoreShipping" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShippingV2_1" nillable="true" type="tns:OutStoreShippingV2_1" />
+          <s:element minOccurs="0" maxOccurs="1" name="Services" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipToAddress" type="tns:ShipToAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductList" type="tns:ArrayOfOutStoreProduct" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyerID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyerEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsInsured" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuredRate" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientPackageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingNew" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OutStoreShipping">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Royalmail" />
+          <s:enumeration value="DHL" />
+          <s:enumeration value="UPS" />
+          <s:enumeration value="USPS" />
+          <s:enumeration value="AuPost" />
+          <s:enumeration value="Parcelforce" />
+          <s:enumeration value="Fedex" />
+          <s:enumeration value="DPD" />
+          <s:enumeration value="CouriersPlease" />
+          <s:enumeration value="TNT" />
+          <s:enumeration value="DePost" />
+          <s:enumeration value="Hermes" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="OutStorePackageNew">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:OutStorePackage" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOutStorePackageNew">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OutStorePackageNew" nillable="true" type="tns:OutStorePackageNew" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="M2CAddOrderNewResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="M2CAddOrderResult" type="tns:M2CAddOrderResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="M2CAddOrderNewResult" type="tns:M2CAddOrderResponse" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -870,6 +988,20 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="M2CAddOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:M2CAddOrderRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="M2CAddOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="M2CAddOrderResult" type="tns:M2CAddOrderResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="M2CAddPaypalOrder">
         <s:complexType>
           <s:sequence>
@@ -1073,93 +1205,6 @@
             </s:sequence>
           </s:extension>
         </s:complexContent>
-      </s:complexType>
-      <s:complexType name="OutStoreOrder">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="OrderSign" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="tns:OrderOutState" />
-          <s:element minOccurs="1" maxOccurs="1" name="Warehouse" type="tns:EnumWarehouse" />
-          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="PackageList" type="tns:ArrayOfOutStorePackage" />
-        </s:sequence>
-      </s:complexType>
-      <s:simpleType name="OrderOutState">
-        <s:restriction base="s:string">
-          <s:enumeration value="Initial" />
-          <s:enumeration value="Sutmitted" />
-          <s:enumeration value="Examined" />
-          <s:enumeration value="Pending" />
-          <s:enumeration value="Shipped" />
-          <s:enumeration value="Dispatching" />
-          <s:enumeration value="Delivered" />
-        </s:restriction>
-      </s:simpleType>
-      <s:complexType name="ArrayOfOutStorePackage">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="OutStorePackage" nillable="true" type="tns:OutStorePackage" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="OutStorePackage">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="tns:OrderOutState" />
-          <s:element minOccurs="0" maxOccurs="1" name="Custom" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Shipping" nillable="true" type="tns:OutStoreShipping" />
-          <s:element minOccurs="1" maxOccurs="1" name="ShippingV2_1" nillable="true" type="tns:OutStoreShippingV2_1" />
-          <s:element minOccurs="0" maxOccurs="1" name="Services" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="ShipToAddress" type="tns:ShipToAddress" />
-          <s:element minOccurs="0" maxOccurs="1" name="ProductList" type="tns:ArrayOfOutStoreProduct" />
-          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="BuyerID" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="ItemID" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="BuyerEmail" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Weight" nillable="true" type="s:decimal" />
-          <s:element minOccurs="1" maxOccurs="1" name="IsInsured" nillable="true" type="s:boolean" />
-          <s:element minOccurs="1" maxOccurs="1" name="InsuredRate" nillable="true" type="s:decimal" />
-          <s:element minOccurs="0" maxOccurs="1" name="ClientPackageId" type="s:string" />
-        </s:sequence>
-      </s:complexType>
-      <s:simpleType name="OutStoreShipping">
-        <s:restriction base="s:string">
-          <s:enumeration value="None" />
-          <s:enumeration value="Royalmail" />
-          <s:enumeration value="DHL" />
-          <s:enumeration value="UPS" />
-          <s:enumeration value="USPS" />
-          <s:enumeration value="AuPost" />
-          <s:enumeration value="Parcelforce" />
-          <s:enumeration value="Fedex" />
-          <s:enumeration value="DPD" />
-          <s:enumeration value="CouriersPlease" />
-          <s:enumeration value="TNT" />
-          <s:enumeration value="DePost" />
-          <s:enumeration value="Hermes" />
-        </s:restriction>
-      </s:simpleType>
-      <s:complexType name="OutStorePackageNew">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:OutStorePackage">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="ShippingNew" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="OutStoreOrderNew">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:OutStoreOrder">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="WarehouseNew" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="PackageListNew" type="tns:ArrayOfOutStorePackageNew" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="ArrayOfOutStorePackageNew">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="OutStorePackageNew" nillable="true" type="tns:OutStorePackageNew" />
-        </s:sequence>
       </s:complexType>
       <s:element name="OutStoreAddOrderNewResponse">
         <s:complexType>
@@ -1608,6 +1653,12 @@
   <wsdl:message name="InStoreGetOrderSoapOut">
     <wsdl:part name="parameters" element="tns:InStoreGetOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="M2CAddOrderNewSoapIn">
+    <wsdl:part name="parameters" element="tns:M2CAddOrderNew" />
+  </wsdl:message>
+  <wsdl:message name="M2CAddOrderNewSoapOut">
+    <wsdl:part name="parameters" element="tns:M2CAddOrderNewResponse" />
+  </wsdl:message>
   <wsdl:message name="M2CAddOrderSoapIn">
     <wsdl:part name="parameters" element="tns:M2CAddOrder" />
   </wsdl:message>
@@ -1764,6 +1815,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取入库订单详细.</wsdl:documentation>
       <wsdl:input message="tns:InStoreGetOrderSoapIn" />
       <wsdl:output message="tns:InStoreGetOrderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="M2CAddOrderNew">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">添加M2C订单</wsdl:documentation>
+      <wsdl:input message="tns:M2CAddOrderNewSoapIn" />
+      <wsdl:output message="tns:M2CAddOrderNewSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="M2CAddOrder">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">添加M2C订单</wsdl:documentation>
@@ -1949,6 +2005,15 @@
     </wsdl:operation>
     <wsdl:operation name="InStoreGetOrder">
       <soap:operation soapAction="http://www.chukou1.com/InStoreGetOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="M2CAddOrderNew">
+      <soap:operation soapAction="http://www.chukou1.com/M2CAddOrderNew" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2204,6 +2269,15 @@
     </wsdl:operation>
     <wsdl:operation name="InStoreGetOrder">
       <soap12:operation soapAction="http://www.chukou1.com/InStoreGetOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="M2CAddOrderNew">
+      <soap12:operation soapAction="http://www.chukou1.com/M2CAddOrderNew" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

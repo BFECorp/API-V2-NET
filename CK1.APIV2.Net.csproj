@@ -67,6 +67,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Aspnet\OutStoreAddOrderNew.aspx" />
     <Content Include="Service References\CK1\Chukou1Demo.CK1.ExpressAddCruOrderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -142,7 +143,7 @@
     <None Include="Service References\CK1\Chukou1Demo.CK1.VerifyUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <Content Include="Service References\CK1\ck1.wsdl" />
+    <None Include="Service References\CK1\ck1.wsdl" />
     <None Include="Service References\CK1\configuration91.svcinfo" />
     <None Include="Service References\CK1\configuration.svcinfo" />
     <None Include="Service References\CK1\Reference.svcmap">
@@ -285,6 +286,13 @@
     </Compile>
     <Compile Include="Aspnet\M2CGetShareStock.aspx.designer.cs">
       <DependentUpon>M2CGetShareStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aspnet\OutStoreAddOrderNew.aspx.cs">
+      <DependentUpon>OutStoreAddOrderNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aspnet\OutStoreAddOrderNew.aspx.designer.cs">
+      <DependentUpon>OutStoreAddOrderNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aspnet\OutStoreAddOrder.aspx.cs">
       <DependentUpon>OutStoreAddOrder.aspx</DependentUpon>

@@ -94,12 +94,18 @@
 					<tr>
 						<td style="text-align: left">
 							<a id="OutStoreAddOrderLink" href="OutStoreAddOrder.aspx">OutStoreAddOrder</a> 
-                            - 添加出库单</td>
+                            - 添加出库单（已过时）</td>
 					</tr>
                     <tr>
 						<td style="text-align: left">
-							<a id="OutStoreAddOrderLink" href="OutStoreAddOrder_V2_1.aspx">OutStoreAddOrder</a> 
-                            - 添加出库单(V2.1)</td>
+							<a id="OutStoreAddOrderLink2" href="OutStoreAddOrder_V2_1.aspx">OutStoreAddOrder</a> 
+                            - 添加出库单(V2.1)（已过时）</td>
+					</tr>
+
+					<tr>
+						<td style="text-align: left">
+							<a id="OutStoreAddOrderLink3" href="OutStoreAddOrderNew.aspx">OutStoreAddOrderNew</a> 
+                            - 添加出库单（新）</td>
 					</tr>
 					<tr>
 						<td style="text-align: left">

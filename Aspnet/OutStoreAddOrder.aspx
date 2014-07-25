@@ -30,7 +30,7 @@
 		<table align="center" style="font-size: large">
 			<tr>
 				<td colspan="3" class="style1" align="center" width="408">
-					<div class="header"><b>OutStoreAddOrder Sample</b></div>
+					<div class="header"><b>OutStoreAddOrder Sample（已过时）</b></div>
 				</td>
 			</tr>
 		</table>

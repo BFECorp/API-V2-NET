@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStoreAddOrder_V2_1.aspx.cs" Inherits="Chukou1Demo.Aspnet.OutStoreAddOrder_V2_1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OutStoreAddOrderNew.aspx.cs" Inherits="Chukou1Demo.Aspnet.OutStoreAddOrderNew" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<title>OutStoreAddOrder_V2_1 Sample</title>
+<title>OutStoreAddOrder Sample</title>
     <style type="text/css">
         .style1
         {
@@ -23,8 +23,6 @@
         {
             color: #FF0000;
         }
-        .ttt{ background-color:#efe; }
-        
     </style>
 </head>
 <body>
@@ -32,7 +30,7 @@
 		<table align="center" style="font-size: large">
 			<tr>
 				<td colspan="3" class="style1" align="center" width="408">
-					<div class="header"><b>OutStoreAddOrder_V2_1 Sample（已过时）</b></div>
+					<div class="header"><b>OutStoreAddOrderNew Sample</b></div>
 				</td>
 			</tr>
 		</table>
@@ -44,11 +42,14 @@
 				    <td>Request</td>
 			    </tr>
 		    </table>
-		    <table align="center" style="font-size: small">			    
+		    <table align="center" style="font-size: small">
+			    
+
+
 			    <tr>
                     <td width="200">Submit</td>
                     <td>
-                        <asp:CheckBox ID="ccbSubmit" runat="server" />
+                        <asp:CheckBox ID="ccbSubmit" runat="server" Checked="True" />
                     </td>
                 </tr>
                 <tr>
@@ -80,14 +81,96 @@
                     <td width="200">
                         Warehouse</td>
                     <td>
-                        
                         <asp:DropDownList ID="ddlWarehouse" runat="server">
-                            <asp:ListItem Value="US">美国</asp:ListItem>
-                            <asp:ListItem Value="AU">澳大利亚</asp:ListItem>
-                            <asp:ListItem Value="UK">英国</asp:ListItem>
-                            <asp:ListItem Value="MA">马来西亚</asp:ListItem>
+                            <asp:ListItem Value="US">US-美国(旧金山)</asp:ListItem>
+                            <asp:ListItem Value="NJ">NJ-美国(新泽西)</asp:ListItem>
+                            <asp:ListItem Value="AU">AU-澳大利亚</asp:ListItem>
+                            <asp:ListItem Value="UK">UK-英国</asp:ListItem>
+                            <asp:ListItem Value="DE">DE-德国</asp:ListItem>
                         </asp:DropDownList>
                         
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200">
+                        ServiceCode</td>
+                    <td>
+                        <select ID="ddlServiceCode" name="ServiceCode">
+                            <optgroup label="US-本地">
+                                                <option value="USNUS">USNUS - 美国邮政本地非挂号</option>
+                                                <option value="USRUS">USRUS - 美国邮政本地挂号</option>
+                                                <option value="USNLE">USNLE - 美国本地经济型派送非挂号</option>
+                                                <option value="USRLE">USRLE - 美国本地经济型派送挂号</option>
+                                                <option value="USRLS">USRLS - 美国本地标准型派送</option>
+                                                <option value="USRLP">USRLP - 美国本地快捷型派送</option>
+                                                <option value="USRSS">USRSS - 美国本地标准签收派送</option>
+                                                <option value="USRPP">USRPP - 美国本地快捷签收派送</option>
+                                                <option value="USFRE">USFRE - 美国邮政本地派送-Flat envelope</option>
+                                                <option value="USNLL">USNLL - 美国邮政本地派送-large letter</option>
+                                        </optgroup>
+<optgroup label="US-国际">
+                                                <option value="USNIU">USNIU - 美国邮政国际派送</option>
+                                                <option value="USRIS">USRIS - 美国国际标准型派送</option>
+                                        </optgroup>
+<optgroup label="NJ-本地">
+                                                <option value="NJNUS">NJNUS - 美国邮政本地非挂号</option>
+                                                <option value="NJRUS">NJRUS - 美国邮政本地挂号</option>
+                                                <option value="NJNLE">NJNLE - 美国本地经济派送非挂号</option>
+                                                <option value="NJRLE">NJRLE - 美国本地经济派送挂号</option>
+                                                <option value="NJRLS">NJRLS - 美国本地标准派送</option>
+                                                <option value="NJRLP">NJRLP - 美国本地快捷型派送</option>
+                                                <option value="NJRSS">NJRSS - 美国本地标准签收派送</option>
+                                                <option value="NJRPP">NJRPP - 美国本地快捷签收派送</option>
+                                                <option value="NJFRE">NJFRE - 美国邮政本地派送-Flat envelope</option>
+                                                <option value="NJNLL">NJNLL - 美国邮政本地派送-large letter</option>
+                                        </optgroup>
+<optgroup label="NJ-国际">
+                                                <option value="NJNIU">NJNIU - 美国邮政国际派送</option>
+                                                <option value="NJRIS">NJRIS - 美国国际标准型派送</option>
+                                        </optgroup>
+<optgroup label="AU-本地">
+                                                <option value="AUNAP">AUNAP - 澳洲邮政非挂号</option>
+                                                <option value="AURAP">AURAP - 澳洲邮政挂号</option>
+                                                <option value="AUREP">AUREP - 澳洲邮政eParcel派送</option>
+                                                <option value="AURPP">AURPP - 澳洲邮政快捷派送</option>
+                                                <option value="AURLT">AURLT - 澳洲本地大货派送</option>
+                                                <option value="AURSP">AURSP - 澳洲本地标准派送</option>
+                                        </optgroup>
+<optgroup label="UK-本地">
+                                                <option value="UKNRM">UKNRM - 英国邮政本地非挂号</option>
+                                                <option value="UKRNX">UKRNX - 英国邮政-Nextday Delivery</option>
+                                                <option value="UKRLS">UKRLS - 英国本地标准派送</option>
+                                                <option value="UKRLE">UKRLE - 英国本地经济派送</option>
+                                                <option value="UKNR2">UKNR2 - 英国邮政本地二级服务非挂号</option>
+                                                <option value="UKRR2">UKRR2 - 英国邮政本地二级服务挂号</option>
+                                                <option value="UKRLO">UKRLO - 英国本地泡货派送</option>
+                                                <option value="UKRLH">UKRLH - 英国本地重货派送</option>
+                                                <option value="UKRRM">UKRRM - 英国邮政本地挂号</option>
+                                                <option value="UKNRT">UKNRT - 英国邮政本地特惠派送非挂号</option>
+                                                <option value="UKPOD">UKPOD - 英国邮政本地派送含POD</option>
+                                                <option value="UKRLF">UKRLF - 英国本地快捷派送</option>
+                                        </optgroup>
+<optgroup label="UK-国际">
+                                                <option value="UKDPD">UKDPD - 英国国际泡货派送</option>
+                                                <option value="UKRIS">UKRIS - 英国国际标准派送</option>
+                                                <option value="UKRIP">UKRIP - 英国国际快捷派送</option>
+                                                <option value="UKNIR">UKNIR - 英国邮政国际派送非挂号</option>
+                                                <option value="UKRIR">UKRIR - 英国邮政国际派送挂号</option>
+                                        </optgroup>
+<optgroup label="DE-国际">
+                                                <option value="DENID">DENID - 德国邮政国际派送</option>
+                                                <option value="DERIS">DERIS - 德国国际标准派送</option>
+                                                <option value="DERID">DERID - 德国邮政国际派送挂号</option>
+                                                <option value="DERIT">DERIT - 德国国际大货派送</option>
+                                        </optgroup>
+<optgroup label="DE-本地">
+                                                <option value="DERLS">DERLS - 德国本地标准派送</option>
+                                                <option value="DENDE">DENDE - 德国邮政本地经济派送</option>
+                                                <option value="DENDS">DENDS - 德国邮政本地标准派送非挂号</option>
+                                                <option value="DERDS">DERDS - 德国邮政本地标准派送挂号</option>
+                                                <option value="DERLT">DERLT - 德国本地大货派送</option>
+                                        </optgroup>
+                        </select>
                     </td>
                 </tr>
                 <tr>
@@ -115,33 +198,14 @@
                     <td width="200">
                         Services</td>
                     <td>
-                        <asp:TextBox ID="txtServices" runat="server" Width="400px"></asp:TextBox>
+                        None
                     </td>
                 </tr>
                 <tr>
                     <td width="200">
                         Shipping</td>
                     <td>
-                        <asp:DropDownList ID="ddlShipping" runat="server">
-<asp:ListItem Value="USNUS">USNUS - 美国邮政本地非挂号</asp:ListItem>
-<asp:ListItem Value="USRUS">USRUS - 美国邮政本地挂号</asp:ListItem>
-
-<asp:ListItem Value="USNLE">USNLE - 美国本地经济型派送非挂号</asp:ListItem>
-<asp:ListItem Value="USRLE">USRLE - 美国本地经济型派送挂号</asp:ListItem>
-<asp:ListItem Value="USRLS">USRLS - 美国本地标准型派送</asp:ListItem>
-<asp:ListItem Value="USRLP">USRLP - 美国本地快捷型派送</asp:ListItem>
-
-<asp:ListItem Value="USNIU">USNIU - 美国邮政国际派送</asp:ListItem>
-<asp:ListItem Value="USRIS">USRIS - 美国国际标准型派送</asp:ListItem>
-
-<asp:ListItem Value="AUNAP">AUNAP - 澳洲邮政非挂号</asp:ListItem>
-<asp:ListItem Value="AURAP">AURAP - 澳洲邮政挂号</asp:ListItem>
-<asp:ListItem Value="AUTNT">AUTNT - 澳洲本地派送-TNT</asp:ListItem>
-<asp:ListItem Value="AUHUT">AUHUT - 澳洲本地派送-HUNTER</asp:ListItem>
-<asp:ListItem Value="AULCP">AULCP - 澳洲本地派送-CP</asp:ListItem>
-<asp:ListItem Value="AURLP">AURLP - 澳洲本地快捷派送</asp:ListItem>
-
-                        </asp:DropDownList>
+                        None
                     </td>
                 </tr>
                 <tr>
@@ -176,32 +240,16 @@
                     <td width="200">
                         SKU</td>
                     <td>
-                        <asp:TextBox ID="txtSKU" runat="server" Width="400px"></asp:TextBox>
+                        <asp:TextBox ID="txtSKU" runat="server" Width="400px">testProduct</asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td width="200">
                         StorageNo</td>
                     <td>
-                        <asp:TextBox ID="txtStorageNo" runat="server" Width="400px">LTST00000276</asp:TextBox>
+                        <asp:TextBox ID="txtStorageNo" runat="server" Width="400px"></asp:TextBox>
                     </td>
                 </tr>
-
-                <tr class="ttt">
-                    <td width="200">
-                        DeclareName</td>
-                    <td>
-                        <asp:TextBox ID="txtDeclareName" runat="server" Width="400px">tt</asp:TextBox>
-                    </td>
-                </tr>
-                <tr class="ttt">
-                    <td width="200">
-                        DeclareValue</td>
-                    <td>
-                        <asp:TextBox ID="txtDeclareValue" runat="server" Width="400px">11</asp:TextBox>
-                    </td>
-                </tr>
-
                 <tr>
                     <td width="200">
                         <span class="style4">ShipToAddress</span></td>
@@ -281,8 +329,8 @@
 
 			    <tr>
 				    <td width="200" align="right">
-                        <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="提交(单包单个商品)" 
-                            Width="164px" />
+                        <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="提交" 
+                            Width="40px" />
                     </td>
 			    </tr>
                 <tr>
@@ -290,58 +338,7 @@
                         <a href="Cell.aspx" style="text-align: right">返回接口目录</a>
                    </td>
                 </tr>
-		    </table>
-
-            <hr />
-
-            <table align="center" style="font-size: small">
-                <tbody>
-                <tr>
-                    <td width="200">
-                        StorageNo 1</td>
-                    <td>
-                        <asp:TextBox ID="StorageNoAdd1" runat="server" Width="400px">LTST00000276</asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">
-                        StorageNo 2</td>
-                    <td>
-                        <asp:TextBox ID="StorageNoAdd2" runat="server" Width="400px">LTST00000276</asp:TextBox>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-				    <td colspan="2">
-                        <asp:Button ID="Button2" Text="1个包裹多个产品" runat="server" onclick="Button2_Click" />&nbsp;&nbsp;
-                        <asp:Button ID="Button1" Text="多个包裹多个产品" runat="server" onclick="Button3_Click" />
-                    </td>
-			    </tr>
-                </tfoot>
-            </table>
-
-            <hr />
-
-            <table align="center" style="font-size: small">            
-                <tr>
-                    <td width="200">
-                        处理号</td>
-                    <td>
-                        <asp:TextBox ID="txtOrderSign2" runat="server" Width="400px">ETST12041100011</asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200">
-                        </td>
-                    <td>
-                        
-                        <asp:Button ID="btnOrderSubmit" runat="server" Text="Button" onclick="btnOrderSubmit_Click" />
-                        
-                    </td>
-                </tr>
-            </table>
-               
+		    </table>            
         </asp:Panel>
         <asp:Panel ID="pnlResponse" runat="server">
 		    <table align="center">
